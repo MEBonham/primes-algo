@@ -23,11 +23,11 @@ def meb_sieve(limit):
         print(i)
         if i in composites:
             expanded_factors = expand(composites[i])
-            print("expansion", prod(expanded_factors)
+            print("expansion", prod(expanded_factors))
             composites[prod(expanded_factors)] = expanded_factors
    
             upgraded_factors = upgrade(composites[i], primes
-            print("upgrade", prod(upgraded_factors)
+            print("upgrade", prod(upgraded_factors))
             composites[prod(upgraded_factors)] = upgraded_factors
         else:
             primes.append(i)
