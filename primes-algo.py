@@ -1,32 +1,30 @@
-from bisect import insort
+from bisect import bisect
 from math import prod
 
 def meb_sieve(limit):
     
     def expand(factors):
-        return [*factors, factors[-1]]
+        factors.append(factors[-1])
+        return factors
+    
     def upgrade(factors, primes):
-        j = primes.index(factors[-1])
-        return [*factors[:-1], primes[j + 1]]
+        next_index = bisect(primes, factors[-1])
+        factors[-1] = primes[next_index]
+        return factors
     
     primes = []
-    composites = set()
-    factors_dict = {}
+    composites = {}
     
     for i in range(2, limit + 1):
-        if not i in composites:
-            insort(primes, i)
-            composites.add(i ** 2)
-            factors_dict[i ** 2] = [i, i]
-        else:
-            expanded_factors = expand(factors_dict[i])
-            c = prod(expanded_factors)
-            composites.add(c)
-            factors_dict[c] = expanded_factors
+        if i in composites:
+            expanded_factors = expand(composites[i])
+            composites[prod(expanded_factors)] = expanded_factors
    
-            upgraded_factors = upgrade(factors_dict[i], primes)
-            c = prod(upgraded_factors)
-            composites.add(c)
-            factors_dict[c] = upgraded_factors
+            upgraded_factors = upgrade(composites[i], primes)
+            composites[prod(expanded_factors)] = upgraded_factors
+        else:
+            primes.append(i)
+            primes.sort()
+            composites[i ** 2] = [i, i]
     
     return primes
