@@ -23,7 +23,7 @@ def meb_sieve(limit):
             composites[prod(expanded_factors)] = expanded_factors
    
             upgraded_factors = upgrade(composites[i], primes)
-            composites[prod(expanded_factors)] = upgraded_factors
+            composites[prod(upgraded_factors)] = upgraded_factors
         else:
             primes.append(i)
             primes.sort()
