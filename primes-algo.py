@@ -16,7 +16,6 @@ def meb_sieve(limit):
         return f_copy
     
     latest_p = 2
-    primes = []
     composites = {}
     
     for i in range(2, limit + 1):
@@ -33,7 +32,10 @@ def meb_sieve(limit):
                 latest_p = i
             composites[i ** 2] = [i, i]
     
-    primes.sort()
+    primes = [2]
+    while len(primes) < len(prime_steps):
+        primes.append(prime_steps[primes[-1]])
+    
     return primes
 
 t1 = datetime.now()
