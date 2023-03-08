@@ -4,16 +4,17 @@ from math import prod
 def meb_sieve(limit):
     
     def expand(factors):
-        f = [*factors]
-        f.append(factors[-1])
-        return f
+        f_copy = [*factors]
+        f_copy.append(factors[-1])
+        return f_copy
     
+    prime_steps = {}
     def upgrade(factors, primes):
-        next_index = bisect(primes, factors[-1])
-        f = [*factors]
-        f[-1] = primes[next_index]
-        return f
+        f_copy = [*factors]
+        f_copy[-1] = prime_steps[factors[-1]]
+        return f_copy
     
+    latest_p = 0
     primes = []
     composites = {}
     
@@ -26,7 +27,9 @@ def meb_sieve(limit):
             composites[prod(upgraded_factors)] = upgraded_factors
         else:
             primes.append(i)
-            primes.sort()
+            if i > 2:
+                prime_steps[latest_p] = i
+                latest_p = i
             composites[i ** 2] = [i, i]
     
-    return primes
+    return primes.sort()
