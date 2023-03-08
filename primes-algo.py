@@ -21,7 +21,8 @@ def meb_sieve(limit):
             expanded_factors = expand(factors_dict[i]) 
             c = product(expanded_factors) 
             composites.add(c) 
-            factors_dict[c] = expanded_factors 
+            factors_dict[c] = expanded_factors
+            
             upgraded_factors = upgrade(factors_dict[i], primes) 
             c = product(upgraded_factors) 
             composites.add(c) 
