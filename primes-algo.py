@@ -4,13 +4,15 @@ from math import prod
 def meb_sieve(limit):
     
     def expand(factors):
-        factors.append(factors[-1])
-        return factors
+        f = [*factors]
+        f.append(factors[-1])
+        return f
     
     def upgrade(factors, primes):
         next_index = bisect(primes, factors[-1])
-        factors[-1] = primes[next_index]
-        return factors
+        f = [*factors]
+        f[-1] = primes[next_index]
+        return f
     
     primes = []
     composites = {}
