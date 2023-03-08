@@ -1,3 +1,5 @@
+from bisect import insort
+
 def meb_sieve(limit):  
     def product(factors): 
         p = 1 
@@ -14,7 +16,7 @@ def meb_sieve(limit):
     factors_dict = {} 
     for i in range(2, limit + 1): 
         if not i in composites: 
-            bisect.insort(primes, i) 
+            insort(primes, i) 
             composites.add(i ** 2) 
             factors_dict[i ** 2] = [i, i] 
         else: 
