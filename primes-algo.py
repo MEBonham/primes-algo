@@ -37,5 +37,5 @@ def meb_sieve(limit):
     return primes
 
 t1 = datetime.now()
-p = meb_sieve(10)
+p = meb_sieve(100000)
 print(datetime.now() - t1, p[-1])
