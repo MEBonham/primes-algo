@@ -1,6 +1,8 @@
 from math import prod
 from datetime import datetime
 
+FIRST_PRIME = 2
+
 def meb_sieve(limit):
     
     def expand(factors):
@@ -14,10 +16,10 @@ def meb_sieve(limit):
         f_copy[-1] = prime_steps[factors[-1]]
         return f_copy
     
-    latest_p = 2
+    latest_p = FIRST_PRIME
     composites = {}
     
-    for i in range(2, limit + 1):
+    for i in range(FIRST_PRIME, limit + 1):
         if i in composites:
             expanded_factors = expand(composites[i])
             composites[prod(expanded_factors)] = expanded_factors
@@ -25,12 +27,12 @@ def meb_sieve(limit):
             upgraded_factors = upgrade(composites[i])
             composites[prod(upgraded_factors)] = upgraded_factors
         else:
-            if i > 2:
+            if i > FIRST_PRIME:
                 prime_steps[latest_p] = i
                 latest_p = i
             composites[i ** 2] = [i, i]
     
-    primes = [2]
+    primes = [FIRST_PRIME]
     while len(primes) <= len(prime_steps):
         primes.append(prime_steps[primes[-1]])
     
