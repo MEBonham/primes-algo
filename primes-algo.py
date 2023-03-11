@@ -1,9 +1,8 @@
 from math import prod
 from datetime import datetime
 
-FIRST_PRIME = 2
-
 def meb_sieve(limit):
+    FIRST_PRIME = 2
     
     def expand(factors):
         f_copy = [*factors]
